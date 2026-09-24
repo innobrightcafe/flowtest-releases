@@ -1,0 +1,22 @@
+.gcloudignore
+.git
+.gitignore
+.github
+.gradle
+.kotlin
+app/build
+app/src
+gradle
+*.iml
+local.properties
+.env
+debug.keystore*
+node_modules
+server.log
+
+# Ensure APK binaries are never ignored during source upload
+!webapp/FlowTest.apk
+!webapp/download/FlowTest.apk
+!FlowTest.apk
+!.build-outputs/*.apk
+

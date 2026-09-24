@@ -1,0 +1,410 @@
+name: Build & Publish Release APK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version_name:
+        description: 'Version Name (e.g. 1.4.2 - leave blank to auto-increment)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  issues: read
+  pull-requests: read
+
+env:
+  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
+
+jobs:
+  build-and-release:
+    name: Build, Sign, and Publish Release APK
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Configure Android SDK and Build Tools
+        id: setup_build_tools
+        run: |
+          echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || yes | sdkmanager --licenses 2>/dev/null || true
+          
+          # Detect available Android build-tools version on runner
+          BUILD_TOOLS_DIR="${ANDROID_SDK_ROOT:-$ANDROID_HOME}/build-tools"
+          if [ -d "$BUILD_TOOLS_DIR" ]; then
+            LATEST_TOOLS=$(ls -1 "$BUILD_TOOLS_DIR" | sort -V | tail -n 1)
+            echo "Detected Android Build Tools: $LATEST_TOOLS"
+            echo "BUILD_TOOLS_VERSION=$LATEST_TOOLS" >> $GITHUB_ENV
+            echo "build_tools_version=$LATEST_TOOLS" >> $GITHUB_OUTPUT
+            
+            # Ensure backwards-compatibility symlink for actions expecting 29.0.3
+            if [ ! -d "$BUILD_TOOLS_DIR/29.0.3" ] && [ -n "$LATEST_TOOLS" ]; then
+              sudo ln -sf "$BUILD_TOOLS_DIR/$LATEST_TOOLS" "$BUILD_TOOLS_DIR/29.0.3" || ln -sf "$BUILD_TOOLS_DIR/$LATEST_TOOLS" "$BUILD_TOOLS_DIR/29.0.3" || true
+              echo "Created compatibility symlink: $BUILD_TOOLS_DIR/29.0.3 -> $BUILD_TOOLS_DIR/$LATEST_TOOLS"
+            fi
+          fi
+
+      - name: Grant Execute Permission for Gradle
+        run: |
+          chmod +x gradlew || true
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Restore or Generate Debug Keystore
+        run: |
+          if [ -f "debug.keystore.base64" ]; then
+            echo "Restoring debug.keystore from base64..."
+            base64 -d debug.keystore.base64 > debug.keystore
+          elif [ ! -f "debug.keystore" ]; then
+            echo "Generating debug.keystore..."
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          fi
+
+      # Dynamically extracts or auto-increments the Android Version Name and Code
+      - name: Extract Version Name & Auto-Increment
+        id: get_version
+        run: |
+          # 1. Determine base major.minor from app/build.gradle.kts (e.g. 1.4)
+          GRADLE_VN=$(grep -m1 'defaultVersionName =' app/build.gradle.kts 2>/dev/null | cut -d'"' -f2)
+          BASE_VN=${GRADLE_VN:-"1.4.1"}
+          MAJOR_MINOR=$(echo "$BASE_VN" | awk -F. '{print $1"."$2}')
+          if [ -z "$MAJOR_MINOR" ]; then
+            MAJOR_MINOR="1.4"
+          fi
+
+          if [ -n "${{ github.event.inputs.version_name }}" ]; then
+            RAW_VN="${{ github.event.inputs.version_name }}"
+            RAW_TAG="v${RAW_VN}"
+          elif [[ "${{ github.ref_name }}" == v* ]]; then
+            RAW_VN="${GITHUB_REF_NAME#v}"
+            RAW_TAG="${{ github.ref_name }}"
+          else
+            # Automatically calculate auto-incrementing version name using run number (e.g. 1.4.15)
+            RAW_VN="${MAJOR_MINOR}.${{ github.run_number }}"
+            RAW_TAG="v${RAW_VN}"
+          fi
+
+          # Ensure versionCode is monotonically increasing and strictly greater than any old build
+          BUILD_VC=$(( 100 + ${{ github.run_number }} ))
+          echo "VERSION_NAME=$RAW_VN" >> $GITHUB_ENV
+          echo "RELEASE_TAG=$RAW_TAG" >> $GITHUB_ENV
+          echo "BUILD_VC=$BUILD_VC" >> $GITHUB_ENV
+          echo "Target Version Name: $RAW_VN"
+          echo "Target Version Code: $BUILD_VC"
+          echo "Target Tag: $RAW_TAG"
+
+      # Check if keystore signing secrets are configured
+      - name: Check Signing Secrets
+        id: check_signing
+        run: |
+          if [ -n "${{ secrets.SIGNING_KEY }}" ] && [ -n "${{ secrets.ALIAS }}" ] && [ -n "${{ secrets.KEY_STORE_PASSWORD }}" ] && [ -n "${{ secrets.KEY_PASSWORD }}" ]; then
+            echo "has_signing=true" >> $GITHUB_OUTPUT
+            echo "✅ Production keystore secrets detected."
+          else
+            echo "has_signing=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ Signing secrets not configured. Building signed debug APK instead."
+          fi
+
+      # 1A. Build Release APK (if production keystore secrets are present)
+      - name: Build Unsigned Release APK
+        if: steps.check_signing.outputs.has_signing == 'true'
+        run: |
+          ./gradlew clean assembleRelease --no-daemon --stacktrace \
+            -PversionCode=${{ env.BUILD_VC }} \
+            -PversionName=${{ env.VERSION_NAME }}
+
+      # 1B. Sign App APK with r0adkll/sign-android-release
+      - name: Sign App APK
+        if: steps.check_signing.outputs.has_signing == 'true'
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+          buildToolsVersion: ${{ steps.setup_build_tools.outputs.build_tools_version || '35.0.0' }}
+
+      # 2A. Fallback: Build Debug APK (if no signing secrets provided yet)
+      - name: Build Debug APK
+        if: steps.check_signing.outputs.has_signing != 'true'
+        run: |
+          ./gradlew clean assembleDebug --no-daemon --stacktrace \
+            -PversionCode=${{ env.BUILD_VC }} \
+            -PversionName=${{ env.VERSION_NAME }}
+
+      # 3. Standardize output APK filename to FlowTest.apk and FlowTest_v<VERSION>.apk
+      - name: Package & Prepare Release Assets
+        id: prepare_assets
+        run: |
+          mkdir -p release-assets webapp webapp/download .build-outputs
+          
+          if [ "${{ steps.check_signing.outputs.has_signing }}" == "true" ] && [ -n "${{ steps.sign_app.outputs.signedReleaseFile }}" ] && [ -f "${{ steps.sign_app.outputs.signedReleaseFile }}" ]; then
+            SRC_APK="${{ steps.sign_app.outputs.signedReleaseFile }}"
+          elif [ -f "app/build/outputs/apk/release/app-release.apk" ]; then
+            SRC_APK="app/build/outputs/apk/release/app-release.apk"
+          elif [ -f "app/build/outputs/apk/release/app-release-unsigned.apk" ]; then
+            SRC_APK="app/build/outputs/apk/release/app-release-unsigned.apk"
+          else
+            SRC_APK="app/build/outputs/apk/debug/app-debug.apk"
+          fi
+
+          echo "Using source APK: $SRC_APK"
+          cp "$SRC_APK" release-assets/FlowTest.apk
+          cp "$SRC_APK" "release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk"
+          cp "$SRC_APK" webapp/FlowTest.apk
+          cp "$SRC_APK" webapp/download/FlowTest.apk
+          cp "$SRC_APK" FlowTest.apk
+          cp "$SRC_APK" .build-outputs/FlowTest.apk
+
+          cat <<EOF > webapp/update-manifest.json
+          {
+            "versionCode": ${{ env.BUILD_VC }},
+            "versionName": "${{ env.VERSION_NAME }}",
+            "commitHash": "${{ github.sha }}",
+            "releaseNotes": "FlowTest v${{ env.VERSION_NAME }} live release with direct APK streaming, zero-trust WireGuard VPN, and Moniepoint wallet.",
+            "isMandatory": false,
+            "apkDownloadUrl": "/download/FlowTest.apk",
+            "downloadUrl": "/download/FlowTest.apk",
+            "fallbackApkUrl": "https://firebasestorage.googleapis.com/v0/b/getmehost-db.firebasestorage.app/o/FlowTest.apk?alt=media",
+            "deployedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          }
+          EOF
+          cp -f webapp/update-manifest.json .build-outputs/update-manifest.json
+
+          # Calculate SHA-256 Checksum for security verification
+          sha256sum release-assets/FlowTest.apk > release-assets/sha256.txt
+
+          echo "asset_path=release-assets/*" >> $GITHUB_OUTPUT
+          ls -la release-assets/
+
+      # Upload APK to GitHub Actions Run as an Artifact
+      - name: Upload APK Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: FlowTest-APKs-${{ env.VERSION_NAME }}-build${{ env.BUILD_VC }}
+          path: |
+            release-assets/FlowTest.apk
+            release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk
+            release-assets/sha256.txt
+            webapp/update-manifest.json
+          retention-days: 30
+
+      # 4. Check Release Target and Credentials
+      - name: Verify Release Target and Credentials
+        id: release_target
+        run: |
+          TARGET_REPO="${{ secrets.PUBLIC_REPO_NAME || vars.PUBLIC_REPO_NAME || 'innobrightcafe/flowtest-releases' }}"
+          # Correct legacy/shortened handle if provided in secrets
+          if [ "$TARGET_REPO" = "innobright/flowtest-releases" ]; then
+            TARGET_REPO="innobrightcafe/flowtest-releases"
+          fi
+          echo "target_repo=$TARGET_REPO" >> $GITHUB_OUTPUT
+
+          # Support token stored either in Repository Secrets or in Repository Variables
+          RAW_TOKEN="${{ secrets.RELEASE_REPO_TOKEN || vars.RELEASE_REPO_TOKEN }}"
+          CLEAN_TOKEN=$(echo "$RAW_TOKEN" | tr -d '\r\n ' )
+
+          if [ -n "$CLEAN_TOKEN" ] && [ "$CLEAN_TOKEN" != "default_release_token" ]; then
+            echo "Validating RELEASE_REPO_TOKEN against GitHub API..."
+            HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "Authorization: Bearer $CLEAN_TOKEN" https://api.github.com/user)
+            if [ "$HTTP_CODE" = "200" ]; then
+              echo "has_custom_token=true" >> $GITHUB_OUTPUT
+              echo "CUSTOM_RELEASE_TOKEN=$CLEAN_TOKEN" >> $GITHUB_ENV
+              echo "✅ RELEASE_REPO_TOKEN validated successfully (HTTP 200). Will publish release to: $TARGET_REPO"
+            else
+              echo "has_custom_token=false" >> $GITHUB_OUTPUT
+              echo "⚠️ RELEASE_REPO_TOKEN authentication failed with HTTP $HTTP_CODE (Bad credentials)."
+              echo "ℹ️ The token found in GitHub Secrets/Variables was rejected by GitHub."
+              echo "ℹ️ Please verify that you generated a Personal Access Token (PAT) with 'repo' scope."
+              echo "ℹ️ Ensure it is saved under Flowtest -> Settings -> Secrets and variables -> Actions -> Repository Secrets."
+            fi
+          else
+            echo "has_custom_token=false" >> $GITHUB_OUTPUT
+            echo "⚠️ RELEASE_REPO_TOKEN not found in GitHub Secrets or Variables."
+            echo "ℹ️ Cross-repository release to '$TARGET_REPO' requires a GitHub Personal Access Token (PAT) with 'repo' scope."
+            echo "ℹ️ If not set, release will publish to current repository: ${{ github.repository }}"
+          fi
+
+      # 5. Create GitHub Release and Upload APK Assets to Public Repository (if token configured)
+      - name: Create GitHub Release in Public Releases Repository
+        if: steps.release_target.outputs.has_custom_token == 'true'
+        id: create_public_release
+        continue-on-error: true
+        run: |
+          TARGET="${{ steps.release_target.outputs.target_repo }}"
+          TAG="${{ env.RELEASE_TAG }}"
+          TITLE="FlowTest ${{ env.RELEASE_TAG }}"
+          echo "Attempting release to $TARGET for tag $TAG..."
+
+          if command -v gh >/dev/null 2>&1; then
+            echo "Using GitHub CLI to publish release..."
+            export GH_TOKEN="${{ env.CUSTOM_RELEASE_TOKEN }}"
+            gh release create "$TAG" \
+              release-assets/FlowTest.apk \
+              release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk \
+              release-assets/sha256.txt \
+              --repo "$TARGET" \
+              --target "main" \
+              --title "$TITLE" \
+              --notes "Official release of FlowTest Android APK (v${{ env.VERSION_NAME }}). Includes WireGuard High-Speed VPN Tunneling, automated in-app OTA updates, wallet integrations, and SHA-256 checksums." || {
+                echo "Release create failed or already exists; attempting to upload assets..."
+                gh release upload "$TAG" \
+                  release-assets/FlowTest.apk \
+                  release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk \
+                  release-assets/sha256.txt \
+                  --repo "$TARGET" \
+                  --clobber
+              }
+            echo "gh_status=success" >> $GITHUB_OUTPUT
+            echo "🎉 Successfully published release via gh CLI to $TARGET!"
+          else
+            echo "gh CLI not found; falling back to action-gh-release."
+            exit 1
+          fi
+
+      # Secondary fallback using softprops/action-gh-release with explicit token parameter
+      - name: Create GitHub Release in Public Repo (Action Fallback)
+        if: steps.release_target.outputs.has_custom_token == 'true' && steps.create_public_release.outcome == 'failure'
+        id: create_public_release_action
+        continue-on-error: true
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ env.CUSTOM_RELEASE_TOKEN }}
+          repository: ${{ steps.release_target.outputs.target_repo }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          target_commitish: main
+          name: FlowTest ${{ env.RELEASE_TAG }}
+          body: |
+            ## FlowTest ${{ env.RELEASE_TAG }}
+            Official release of FlowTest Android APK (v${{ env.VERSION_NAME }}).
+            - WireGuard High-Speed Secure VPN Tunneling
+            - Automated In-App OTA Updates
+            - Moniepoint & Instant Wallet Integrations
+            - SHA-256 Checksum Included
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+          files: |
+            release-assets/FlowTest.apk
+            release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk
+            release-assets/sha256.txt
+        env:
+          GITHUB_TOKEN: ${{ env.CUSTOM_RELEASE_TOKEN }}
+
+      - name: Check Public Release Outcome
+        if: steps.release_target.outputs.has_custom_token == 'true'
+        run: |
+          if [ "${{ steps.create_public_release.outcome }}" = "success" ] || [ "${{ steps.create_public_release_action.outcome }}" = "success" ]; then
+            echo "🎉 Successfully published release to public repository ${{ steps.release_target.outputs.target_repo }}!"
+          else
+            echo "❌ Failed to publish release to ${{ steps.release_target.outputs.target_repo }}."
+            echo "ℹ️ Please verify that RELEASE_REPO_TOKEN in Flowtest Settings -> Secrets has 'repo' scope."
+          fi
+
+      # 6. Fallback or Local Release: Publish to Current Repository
+      - name: Publish Release to Current Repository
+        if: steps.release_target.outputs.has_custom_token != 'true' || (steps.create_public_release.outcome == 'failure' && steps.create_public_release_action.outcome == 'failure')
+        continue-on-error: true
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: FlowTest ${{ env.RELEASE_TAG }}
+          body: |
+            ## FlowTest ${{ env.RELEASE_TAG }}
+            Official release of FlowTest Android APK (v${{ env.VERSION_NAME }}).
+            - WireGuard High-Speed Secure VPN Tunneling
+            - Automated In-App OTA Updates
+            - Moniepoint & Instant Wallet Integrations
+            - SHA-256 Checksum Included
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+          files: |
+            release-assets/FlowTest.apk
+            release-assets/FlowTest_v${{ env.VERSION_NAME }}.apk
+            release-assets/sha256.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 5. Check GCP Credentials for Automatic Cloud Run Update
+      - name: Check GCP Credentials
+        id: check_gcp
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        run: |
+          if [ -n "$GCP_SA_KEY" ] && [ -n "$GCP_PROJECT_ID" ]; then
+            echo "has_gcp=true" >> $GITHUB_OUTPUT
+            echo "✅ GCP credentials detected. Proceeding with automatic Cloud Run backend and website update."
+          else
+            echo "has_gcp=false" >> $GITHUB_OUTPUT
+            echo "ℹ️ GCP credentials not set in this workflow. Skipping Cloud Run deploy."
+          fi
+
+      - name: Authenticate to Google Cloud
+        if: steps.check_gcp.outputs.has_gcp == 'true'
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        if: steps.check_gcp.outputs.has_gcp == 'true'
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          version: '>= 460.0.0'
+
+      - name: Deploy Updated APK & Backend to Cloud Run
+        if: steps.check_gcp.outputs.has_gcp == 'true'
+        run: |
+          echo "Deploying newly published APK and manifest directly to Google Cloud Run (flowtest-backend)..."
+          gcloud run deploy flowtest-backend \
+            --source . \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --region us-central1 \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8080 \
+            --memory 512Mi \
+            --cpu 1 \
+            --timeout 300 \
+            --set-env-vars DOMAIN="${{ secrets.DOMAIN || 'flowtest2026.com' }}",PUBLIC_REPO_NAME="${{ secrets.PUBLIC_REPO_NAME || 'innobrightcafe/flowtest-releases' }}",REPO_NAME="${{ secrets.PUBLIC_REPO_NAME || 'innobrightcafe/flowtest-releases' }}",GCS_BUCKET_NAME="${{ secrets.GCS_BUCKET_NAME || secrets.GCS_APK_BUCKET || 'getmehost-db.firebasestorage.app' }}",PAIRGATE_API_KEY="${{ secrets.PAIRGATE_API_KEY || 'PG_live_KWSnkTrR4rs4nkZs3jxU9xjLvLcefpLD89cV6SbA4gHzU' }}",MONIEPOINT_WEBHOOK_SECRET="${{ secrets.MONIEPOINT_WEBHOOK_SECRET || 'mnp_whsec_994a08b3c10a4592cd718b' }}" || true
+
+          if gcloud run services describe pairgate-webhook-service --project ${{ secrets.GCP_PROJECT_ID }} --region us-central1 >/dev/null 2>&1; then
+            echo "Deploying newly published APK and manifest to pairgate-webhook-service as well..."
+            gcloud run deploy pairgate-webhook-service \
+              --source . \
+              --project ${{ secrets.GCP_PROJECT_ID }} \
+              --region us-central1 \
+              --platform managed \
+              --allow-unauthenticated \
+              --port 8080 \
+              --memory 512Mi \
+              --cpu 1 \
+              --timeout 300 \
+              --set-env-vars DOMAIN="${{ secrets.DOMAIN || 'flowtest2026.com' }}",PUBLIC_REPO_NAME="${{ secrets.PUBLIC_REPO_NAME || 'innobrightcafe/flowtest-releases' }}",REPO_NAME="${{ secrets.PUBLIC_REPO_NAME || 'innobrightcafe/flowtest-releases' }}",GCS_BUCKET_NAME="${{ secrets.GCS_BUCKET_NAME || secrets.GCS_APK_BUCKET || 'getmehost-db.firebasestorage.app' }}",PAIRGATE_API_KEY="${{ secrets.PAIRGATE_API_KEY || 'PG_live_KWSnkTrR4rs4nkZs3jxU9xjLvLcefpLD89cV6SbA4gHzU' }}",MONIEPOINT_WEBHOOK_SECRET="${{ secrets.MONIEPOINT_WEBHOOK_SECRET || 'mnp_whsec_994a08b3c10a4592cd718b' }}" || true
+          fi
+          echo "✅ Cloud Run deployment finished."

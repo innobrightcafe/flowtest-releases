@@ -1,0 +1,94 @@
+{
+  "9mobile_GIFTING": [
+    {
+      "plan_id": "188",
+      "name": "40MB",
+      "price": 50,
+      "duration": 1
+    },
+    {
+      "plan_id": "187",
+      "name": "83MB + 50MB Social",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "178",
+      "name": "150MB + 100MB Night Data",
+      "price": 150,
+      "duration": 1
+    },
+    {
+      "plan_id": "177",
+      "name": "200MB Social Plan",
+      "price": 200,
+      "duration": 7
+    },
+    {
+      "plan_id": "391",
+      "name": "250MB",
+      "price": 200,
+      "duration": 1
+    },
+    {
+      "plan_id": "186",
+      "name": "650MB + 100MB Socials",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "185",
+      "name": "2GB",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "181",
+      "name": "2.3GB",
+      "price": 1200,
+      "duration": 30
+    },
+    {
+      "plan_id": "396",
+      "name": "3.2GB ",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "397",
+      "name": "3.4GB",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "180",
+      "name": "4.5GB",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "179",
+      "name": "5.2GB",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "184",
+      "name": "6.2GB",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "183",
+      "name": "8.4GB",
+      "price": 4000,
+      "duration": 30
+    },
+    {
+      "plan_id": "182",
+      "name": "11.4GB",
+      "price": 5000,
+      "duration": 30
+    }
+  ]
+}

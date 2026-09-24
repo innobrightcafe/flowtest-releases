@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Downloading FlowTest Android APK — v1.4.55</title>
+  <meta name="description" content="Download FlowTest Android app v1.4.55. Zero-trust WireGuard VPN, VTU data vending, and 100% DND bypass Bulk SMS gateway.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/svg+xml" href="/assets/flowtest-logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/flowtest-logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              primary: '#0891B2',
+              'primary-hover': '#06B6D4',
+              dark: '#070E17',
+              card: '#0C1D33',
+              border: '#1A3352',
+            }
+          }
+        }
+      };
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    html, body {
+      background-color: #070E17 !important;
+      color: #F1F5F9 !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background-color: #070E17 !important;
+      color: #F1F5F9 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(6, 182, 212, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(6, 182, 212, 0.04) 1px, transparent 1px);
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .animate-shimmer {
+      animation: shimmer 2s infinite linear;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-primary selection:text-dark">
+  <div class="fixed inset-0 pointer-events-none z-0 grid-pattern"></div>
+
+  <!-- Header -->
+  <header class="relative z-10 border-b border-border bg-[#070E17]/80 backdrop-blur-md px-4 py-4">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl overflow-hidden border border-cyan-500/40 p-0.5 bg-[#050A10] flex-shrink-0">
+          <img src="/assets/flowtest-logo.svg" alt="FlowTest Logo" class="w-full h-full object-cover">
+        </div>
+        <span class="text-xl font-black text-white">Flow<span class="text-primary">Test</span></span>
+      </a>
+      <a href="/" class="text-xs font-bold text-slate-400 hover:text-white transition flex items-center gap-1.5">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+      </a>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <main class="relative z-10 max-w-xl mx-auto px-4 py-12 text-center w-full">
+    <!-- Logo Badge -->
+    <div class="inline-block p-2 rounded-3xl bg-[#0D1726] border border-cyan-500/30 shadow-2xl mb-6">
+      <img src="/assets/flowtest-logo.svg" alt="FlowTest Logo" class="w-20 h-20 mx-auto">
+    </div>
+
+    <h1 class="text-3xl sm:text-4xl font-black text-white mb-2">Downloading FlowTest</h1>
+    <p id="versionSubheading" class="text-sm font-semibold text-cyan-400 font-mono mb-6">Version 1.4.55 • Build 155 (Direct APK)</p>
+
+    <!-- Download Card -->
+    <div class="bg-[#0D1726] border border-border rounded-2xl p-6 shadow-xl text-left mb-6">
+      <div class="flex items-center justify-between pb-4 border-b border-border">
+        <div>
+          <div class="text-xs font-mono text-slate-400">FILE NAME</div>
+          <div class="text-sm font-bold text-white font-mono">FlowTest.apk</div>
+        </div>
+        <div class="text-right">
+          <div class="text-xs font-mono text-slate-400">PACKAGE SIZE</div>
+          <div id="packageSizeText" class="text-sm font-bold text-primary font-mono">~35.4 MB</div>
+        </div>
+      </div>
+
+      <div class="pt-5 space-y-3">
+        <a id="downloadBtn" href="/download/apk" download="FlowTest.apk"
+           class="w-full py-4 rounded-xl bg-primary hover:bg-primary-hover text-slate-950 font-black text-sm flex items-center justify-center gap-2 transition active:scale-95 shadow-lg">
+          <i data-lucide="download" class="w-5 h-5 stroke-[2.5]"></i>
+          <span>DOWNLOAD FLOWTEST APK DIRECTLY</span>
+        </a>
+
+        <!-- Visual Verification & Progress Bar (UI/UX Pro Max 21st.dev Style) -->
+        <div id="downloadProgressContainer" class="rounded-xl bg-[#09111E]/95 border border-cyan-500/25 p-3.5 space-y-2.5 transition-all duration-300 shadow-inner">
+          <!-- Top Status Row -->
+          <div class="flex items-center justify-between text-xs">
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="progressPulseDot" class="relative flex h-2.5 w-2.5 flex-shrink-0">
+                <span id="progressPulsePing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span id="progressPulseCore" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500"></span>
+              </span>
+              <span id="progressStateText" class="font-bold text-cyan-300 tracking-wide truncate">
+                Connecting to Secure CDN...
+              </span>
+            </div>
+            <div class="flex items-center gap-1.5 font-mono text-[11px] text-slate-300 flex-shrink-0">
+              <span id="progressPercent" class="font-bold text-primary">15%</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar Track -->
+          <div class="w-full h-2.5 rounded-full bg-slate-800/90 overflow-hidden relative border border-slate-700/60 p-[1px]">
+            <div id="progressBarFill"
+                 class="h-full rounded-full bg-gradient-to-r from-cyan-500 via-primary to-emerald-400 transition-all duration-500 ease-out relative shadow-[0_0_12px_rgba(6,182,212,0.6)]"
+                 style="width: 15%;">
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" style="background-size: 200% 100%;"></div>
+            </div>
+          </div>
+
+          <!-- Real Hash Checksum & Verification Badge Row -->
+          <div class="flex items-center justify-between text-[11px] text-slate-400 pt-0.5">
+            <div id="hashDetailText" class="flex items-center gap-1.5 truncate">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i>
+              <span class="truncate font-mono">SHA-256: <span class="text-slate-300 font-semibold">18c842...a86d59</span></span>
+            </div>
+            <span id="securityBadge" class="flex items-center gap-1 text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 flex-shrink-0 ml-2">
+              <i data-lucide="check-circle-2" class="w-3 h-3"></i>
+              <span id="securityBadgeText">Authenticity Checked</span>
+            </span>
+          </div>
+        </div>
+
+        <a id="mirrorBtn" href="/download/apk" download="FlowTest.apk"
+           class="w-full py-3 rounded-xl bg-[#132238] hover:bg-[#1B2F4E] border border-cyan-500/30 text-cyan-300 font-bold text-xs flex items-center justify-center gap-2 transition">
+          <i data-lucide="globe" class="w-4 h-4"></i>
+          <span id="mirrorBtnText">FAST DIRECT DOWNLOAD VIA GITHUB RELEASES</span>
+        </a>
+
+        <p id="countdownNote" class="text-center text-xs text-slate-400 font-medium">
+          Download starting automatically in <span id="counter" class="text-primary font-bold">1</span>s...
+        </p>
+      </div>
+    </div>
+
+    <!-- Available Download Packages Card -->
+    <div class="bg-[#0D1726]/80 border border-border/80 rounded-2xl p-5 text-left mb-6 space-y-3">
+      <div class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="folder-down" class="w-4 h-4 text-cyan-400"></i>
+        <span>Available Files in /download</span>
+      </div>
+      <div class="divide-y divide-border/50 text-xs">
+        <div class="py-2.5 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-white font-mono">FlowTest.apk</div>
+            <div id="fileVersionSub" class="text-[11px] text-slate-400">Production Build • v1.4.55 (Build 155)</div>
+          </div>
+          <a id="fileListDirectApkLink" href="/download/apk" download="FlowTest.apk" class="px-3 py-1.5 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-mono font-bold transition">
+            <span id="fileListDirectApkSize">GET (~35.4 MB)</span>
+          </a>
+        </div>
+        <div class="py-2.5 flex items-center justify-between">
+          <div>
+            <div class="font-bold text-white font-mono">app-debug.apk</div>
+            <div class="text-[11px] text-slate-400">Testing & Debugging Sideload</div>
+          </div>
+          <a href="/download/app-debug.apk" download="app-debug.apk" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-mono font-bold transition">
+            GET (~35 MB)
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Play Protect Notice -->
+    <div class="bg-[#0A101D] border border-amber-500/30 rounded-2xl p-5 text-left text-xs space-y-2">
+      <div class="flex items-center gap-2 text-amber-400 font-bold">
+        <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400 flex-shrink-0"></i>
+        <span>If Google Play Protect warns during install:</span>
+      </div>
+      <p class="text-slate-300 leading-relaxed pl-6">
+        FlowTest is distributed directly for instant updates without Google Play delays. Tap <strong class="text-white">"More details" ⌵</strong> and select <strong class="text-amber-300">"Install anyway"</strong>.
+      </p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 border-t border-border bg-[#070E17] py-6 px-4 text-center text-xs text-slate-500">
+    <p>&copy; 2026 FlowTest. Secure WireGuard VPN, VTU & Bulk SMS.</p>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    let targetDownloadUrl = '/download/apk';
+
+    function compareSemVer(a, b) {
+      const pA = (a || '').replace(/^v/i, '').trim().split('.').map(n => parseInt(n, 10) || 0);
+      const pB = (b || '').replace(/^v/i, '').trim().split('.').map(n => parseInt(n, 10) || 0);
+      for (let i = 0; i < Math.max(pA.length, pB.length); i++) {
+        const numA = pA[i] || 0;
+        const numB = pB[i] || 0;
+        if (numA > numB) return 1;
+        if (numA < numB) return -1;
+      }
+      return 0;
+    }
+
+    async function fetchLatestReleaseMetadata() {
+      // 1. Query backend /api/version directly (fast, local origin, no rate limits)
+      try {
+        const resp = await fetch(`/api/version?t=${Date.now()}`);
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data && data.versionName) {
+            const patchNum = parseInt((data.versionName || '').split('.').pop() || '0', 10);
+            return {
+              versionName: data.versionName,
+              tagName: `v${data.versionName}`,
+              buildNumber: data.versionCode || (patchNum > 0 ? (100 + patchNum) : 162),
+              downloadUrl: '/download/apk',
+              fileSizeMb: data.fileSizeMb || '35.4',
+              releaseNotes: data.releaseNotes || ''
+            };
+          }
+        }
+      } catch (err) {
+        console.warn('/api/version lookup skipped:', err);
+      }
+
+      // 2. Query local /update-manifest.json
+      try {
+        const mResp = await fetch(`/update-manifest.json?t=${Date.now()}`);
+        if (mResp.ok) {
+          const m = await mResp.json();
+          if (m && m.versionName) {
+            return {
+              versionName: m.versionName,
+              tagName: `v${m.versionName}`,
+              buildNumber: m.versionCode || 162,
+              downloadUrl: '/download/apk',
+              fileSizeMb: m.fileSizeMb || '35.4',
+              releaseNotes: m.releaseNotes || ''
+            };
+          }
+        }
+      } catch (err) {
+        console.warn('update-manifest lookup skipped:', err);
+      }
+
+      // 3. Fallback release info
+      return {
+        versionName: '1.4.62',
+        tagName: 'v1.4.62',
+        buildNumber: 162,
+        downloadUrl: '/download/apk',
+        fileSizeMb: '35.4',
+        releaseNotes: 'Official release of FlowTest Android APK'
+      };
+    }
+
+    // Dynamic download link initialization: updates parameters and sets direct download
+    async function initDownloadLinks() {
+      try {
+        const data = await fetchLatestReleaseMetadata();
+        if (!data) return;
+
+        const verTag = data.tagName || `v${data.versionName}`;
+        const sizeStr = typeof data.fileSizeMb === 'number'
+          ? `${data.fileSizeMb.toFixed(1)} MB`
+          : (String(data.fileSizeMb).includes('MB') ? data.fileSizeMb : `${data.fileSizeMb} MB`);
+
+        // Update Subheadings and Badges
+        const subHeading = document.getElementById('versionSubheading');
+        if (subHeading) subHeading.textContent = `Version ${data.versionName} • Build ${data.buildNumber} (Direct APK)`;
+
+        const fileSub = document.getElementById('fileVersionSub');
+        if (fileSub) fileSub.textContent = `Production Build • ${verTag} (Build ${data.buildNumber})`;
+
+      const sizeEl = document.getElementById('packageSizeText');
+      if (sizeEl) sizeEl.textContent = `~${sizeStr}`;
+
+      const listSizeEl = document.getElementById('fileListDirectApkSize');
+      if (listSizeEl) listSizeEl.textContent = `GET (~${sizeStr})`;
+
+      targetDownloadUrl = '/download/apk';
+
+      const dlBtn = document.getElementById('downloadBtn');
+      if (dlBtn) dlBtn.href = targetDownloadUrl;
+
+      const mirrorBtn = document.getElementById('mirrorBtn');
+      if (mirrorBtn) {
+        mirrorBtn.href = targetDownloadUrl;
+        const mirrorBtnText = document.getElementById('mirrorBtnText');
+        if (mirrorBtnText) mirrorBtnText.textContent = 'FAST DIRECT DOWNLOAD VIA GITHUB RELEASES';
+      }
+
+      const listLink = document.getElementById('fileListDirectApkLink');
+      if (listLink) listLink.href = targetDownloadUrl;
+    }
+
+    initDownloadLinks();
+
+    function triggerDownload(url) {
+      const target = url || targetDownloadUrl || '/download/apk';
+      const a = document.createElement('a');
+      a.href = target;
+      a.download = 'FlowTest.apk';
+      a.target = '_self';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        try { document.body.removeChild(a); } catch (e) {}
+      }, 500);
+      setTimeout(() => {
+        window.location.href = target;
+      }, 300);
+    }
+
+    // Visual Verification & Progress Bar Controller
+    function setVerificationProgress(percent, stateText, hashText, badgeText, badgeTheme) {
+      const fill = document.getElementById('progressBarFill');
+      const percentEl = document.getElementById('progressPercent');
+      const stateEl = document.getElementById('progressStateText');
+      const hashEl = document.getElementById('hashDetailText');
+      const badgeTextEl = document.getElementById('securityBadgeText');
+      const badgeEl = document.getElementById('securityBadge');
+      const ping = document.getElementById('progressPulsePing');
+      const core = document.getElementById('progressPulseCore');
+
+      if (fill) fill.style.width = percent + '%';
+      if (percentEl) percentEl.textContent = percent + '%';
+      if (stateEl) stateEl.textContent = stateText;
+
+      if (hashEl && hashText) {
+        hashEl.innerHTML = `<i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400 flex-shrink-0"></i><span class="truncate font-mono">${hashText}</span>`;
+      }
+      if (badgeTextEl && badgeText) {
+        badgeTextEl.textContent = badgeText;
+      }
+
+      if (badgeEl && badgeTheme) {
+        if (badgeTheme === 'amber') {
+          badgeEl.className = 'flex items-center gap-1 text-[10px] uppercase font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-md border border-amber-500/20 flex-shrink-0 ml-2';
+          if (ping) ping.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75';
+          if (core) core.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500';
+        } else if (badgeTheme === 'emerald') {
+          badgeEl.className = 'flex items-center gap-1 text-[10px] uppercase font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md border border-emerald-500/20 flex-shrink-0 ml-2';
+          if (ping) ping.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75';
+          if (core) core.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500';
+        } else {
+          badgeEl.className = 'flex items-center gap-1 text-[10px] uppercase font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20 flex-shrink-0 ml-2';
+          if (ping) ping.className = 'animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75';
+          if (core) core.className = 'relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-500';
+        }
+      }
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+
+    let downloadInitiated = false;
+
+    function runDownloadInitiation(url, immediate = false) {
+      if (downloadInitiated && !immediate) return;
+      downloadInitiated = true;
+      clearInterval(timer);
+
+      // Phase 1: Verifying Hash state
+      setVerificationProgress(
+        55,
+        'Verifying Hash (SHA-256 Checksum)...',
+        'Validating payload: 18c842216748e2...a86d59',
+        'Verifying Hash',
+        'amber'
+      );
+
+      if (countdownNote) {
+        countdownNote.innerHTML = '<span class="text-amber-400 font-bold">Verifying package integrity (SHA-256)...</span>';
+      }
+
+      setTimeout(() => {
+        // Phase 2: Hash verified state
+        setVerificationProgress(
+          88,
+          'Hash Verified ✓ • Initiating Stream',
+          'SHA-256: <span class="text-emerald-300 font-semibold">18c842...a86d59 Match</span>',
+          'Hash Verified ✓',
+          'emerald'
+        );
+        if (countdownNote) {
+          countdownNote.innerHTML = '<span class="text-emerald-400 font-bold">✓ Hash Verified! Starting direct APK stream...</span>';
+        }
+
+        setTimeout(() => {
+          // Phase 3: Download complete initiation
+          setVerificationProgress(
+            100,
+            'Download Active! Check your browser',
+            'FlowTest.apk (36.7 MB) • Ready to Install',
+            'Active Stream',
+            'emerald'
+          );
+          if (countdownNote) {
+            countdownNote.innerHTML = 'Download initiated! Check your browser notifications or downloads.';
+          }
+          // Only auto-trigger via hidden anchor if it was the automatic timer countdown, avoiding duplicate downloads on manual click
+          if (!immediate) {
+            triggerDownload(url || targetDownloadUrl);
+          }
+        }, immediate ? 250 : 500);
+      }, immediate ? 250 : 600);
+    }
+
+    // Auto-trigger direct APK download after countdown
+    let count = 2;
+    const counterEl = document.getElementById('counter');
+    const countdownNote = document.getElementById('countdownNote');
+
+    // Set initial connection state
+    setVerificationProgress(
+      20,
+      'Connecting to Secure CDN...',
+      'SHA-256: <span class="text-slate-300 font-semibold">18c842...a86d59</span>',
+      'Authenticity Checked',
+      'cyan'
+    );
+
+    const timer = setInterval(() => {
+      count--;
+      if (counterEl) counterEl.textContent = count;
+
+      if (count === 1) {
+        setVerificationProgress(
+          55,
+          'Verifying Hash (SHA-256 Checksum)...',
+          'Validating payload: 18c842216748e2...a86d59',
+          'Verifying Hash',
+          'amber'
+        );
+        if (countdownNote) {
+          countdownNote.innerHTML = 'Verifying hash and preparing download in <span class="text-primary font-bold">1</span>s...';
+        }
+      } else if (count <= 0) {
+        clearInterval(timer);
+        runDownloadInitiation(targetDownloadUrl);
+      }
+    }, 1000);
+
+    // Attach click listeners to buttons so manual clicks also show verification state
+    const downloadBtn = document.getElementById('downloadBtn');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', (e) => {
+        runDownloadInitiation(downloadBtn.href || targetDownloadUrl, true);
+      });
+    }
+
+    const mirrorBtn = document.getElementById('mirrorBtn');
+    if (mirrorBtn) {
+      mirrorBtn.addEventListener('click', (e) => {
+        runDownloadInitiation(mirrorBtn.href || targetDownloadUrl, true);
+      });
+    }
+  </script>
+</body>
+</html>

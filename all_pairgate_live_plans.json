@@ -1,0 +1,1249 @@
+{
+  "mtn_CG": [
+    {
+      "plan_id": "14",
+      "name": "500MB (CG)",
+      "price": 285,
+      "duration": 7
+    },
+    {
+      "plan_id": "15",
+      "name": "1GB (CG)",
+      "price": 425,
+      "duration": 7
+    },
+    {
+      "plan_id": "16",
+      "name": "2GB (CG)",
+      "price": 850,
+      "duration": 30
+    },
+    {
+      "plan_id": "17",
+      "name": "3GB (CG)",
+      "price": 1275,
+      "duration": 30
+    },
+    {
+      "plan_id": "18",
+      "name": "5GB (CG)",
+      "price": 1600,
+      "duration": 30
+    }
+  ],
+  "mtn_GIFTING": [
+    {
+      "plan_id": "364",
+      "name": "75MB (GIFTING)",
+      "price": 80,
+      "duration": 1
+    },
+    {
+      "plan_id": "302",
+      "name": "110MB",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "332",
+      "name": "230MB",
+      "price": 200,
+      "duration": 1
+    },
+    {
+      "plan_id": "301",
+      "name": "500MB",
+      "price": 350,
+      "duration": 1
+    },
+    {
+      "plan_id": "333",
+      "name": "600MB + 2 Mins ",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "316",
+      "name": "500MB",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "299",
+      "name": "500MB + 1GB Youtube",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "300",
+      "name": "1GB Daily Data + 1.5 Mins",
+      "price": 500,
+      "duration": 1
+    },
+    {
+      "plan_id": "285",
+      "name": "1.5GB",
+      "price": 600,
+      "duration": 2
+    },
+    {
+      "plan_id": "274",
+      "name": "2.5GB",
+      "price": 750,
+      "duration": 1
+    },
+    {
+      "plan_id": "297",
+      "name": "2GB",
+      "price": 750,
+      "duration": 2
+    },
+    {
+      "plan_id": "295",
+      "name": "1GB + 1GB Youtube Night",
+      "price": 800,
+      "duration": 7
+    },
+    {
+      "plan_id": "298",
+      "name": "2.5GB",
+      "price": 899.96,
+      "duration": 2
+    },
+    {
+      "plan_id": "272",
+      "name": "3.5GB",
+      "price": 1000,
+      "duration": 1
+    },
+    {
+      "plan_id": "283",
+      "name": "3.2GB",
+      "price": 1000,
+      "duration": 2
+    },
+    {
+      "plan_id": "281",
+      "name": "1.5GB",
+      "price": 1000,
+      "duration": 7
+    },
+    {
+      "plan_id": "315",
+      "name": "1GB",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "271",
+      "name": "4GB",
+      "price": 1200,
+      "duration": 2
+    },
+    {
+      "plan_id": "296",
+      "name": "2GB + 2 Mins",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "318",
+      "name": "3.5GB",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "293",
+      "name": "1.8GB Xtra Bundle",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "270",
+      "name": "5.5GB",
+      "price": 1500,
+      "duration": 2
+    },
+    {
+      "plan_id": "323",
+      "name": "7GB",
+      "price": 1800,
+      "duration": 2
+    },
+    {
+      "plan_id": "331",
+      "name": "2.7GB + 2 Mins",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "329",
+      "name": "3GB",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "319",
+      "name": "5GB",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "320",
+      "name": "6GB",
+      "price": 2500,
+      "duration": 7
+    },
+    {
+      "plan_id": "292",
+      "name": "3.5GB + 5 Mins",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "330",
+      "name": "6.75GB",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "294",
+      "name": "2.7GB Xtra Bundle",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "286",
+      "name": "7GB",
+      "price": 3500,
+      "duration": 30
+    },
+    {
+      "plan_id": "290",
+      "name": "11GB",
+      "price": 3500,
+      "duration": 7
+    },
+    {
+      "plan_id": "327",
+      "name": "15GB",
+      "price": 4000,
+      "duration": 7
+    },
+    {
+      "plan_id": "291",
+      "name": "10GB + 10mins",
+      "price": 4500,
+      "duration": 30
+    },
+    {
+      "plan_id": "326",
+      "name": "12.5GB",
+      "price": 4500,
+      "duration": 14
+    },
+    {
+      "plan_id": "273",
+      "name": "20GB",
+      "price": 5000,
+      "duration": 7
+    },
+    {
+      "plan_id": "321",
+      "name": "14.5GB",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "325",
+      "name": "18GB",
+      "price": 6000,
+      "duration": 14
+    },
+    {
+      "plan_id": "289",
+      "name": "16.5GB",
+      "price": 6500,
+      "duration": 30
+    },
+    {
+      "plan_id": "287",
+      "name": "20GB",
+      "price": 7500,
+      "duration": 30
+    },
+    {
+      "plan_id": "328",
+      "name": "28GB",
+      "price": 8000,
+      "duration": 14
+    },
+    {
+      "plan_id": "334",
+      "name": "30GB Hynetflex Router Only Data Plan",
+      "price": 9000,
+      "duration": 30
+    },
+    {
+      "plan_id": "324",
+      "name": "40GB",
+      "price": 10000,
+      "duration": 14
+    },
+    {
+      "plan_id": "269",
+      "name": "34GB",
+      "price": 10000,
+      "duration": 30
+    },
+    {
+      "plan_id": "279",
+      "name": "36GB",
+      "price": 11000,
+      "duration": 30
+    },
+    {
+      "plan_id": "276",
+      "name": "60GB Hynetflex Router Only",
+      "price": 14500,
+      "duration": 30
+    },
+    {
+      "plan_id": "288",
+      "name": "65GB",
+      "price": 16000,
+      "duration": 30
+    },
+    {
+      "plan_id": "278",
+      "name": "75GB",
+      "price": 18000,
+      "duration": 30
+    },
+    {
+      "plan_id": "284",
+      "name": "120GB + 5GB Youtube/ms Teams / Zoom",
+      "price": 24000,
+      "duration": 30
+    },
+    {
+      "plan_id": "322",
+      "name": "150GB + 2GB Daily 5g Router",
+      "price": 30000,
+      "duration": 30
+    },
+    {
+      "plan_id": "280",
+      "name": "165GB",
+      "price": 35000,
+      "duration": 30
+    },
+    {
+      "plan_id": "277",
+      "name": "150GB",
+      "price": 40000,
+      "duration": 60
+    },
+    {
+      "plan_id": "275",
+      "name": "450GB",
+      "price": 75000,
+      "duration": 90
+    },
+    {
+      "plan_id": "282",
+      "name": "480GB",
+      "price": 90000,
+      "duration": 90
+    },
+    {
+      "plan_id": "317",
+      "name": "1.5TB Data",
+      "price": 225000,
+      "duration": 365
+    }
+  ],
+  "mtn_SME": [],
+  "airtel_CG": [
+    {
+      "plan_id": "89",
+      "name": "500MB (CG)",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "90",
+      "name": "1GB (CG)",
+      "price": 830,
+      "duration": 7
+    },
+    {
+      "plan_id": "91",
+      "name": "1.5GB (CG)",
+      "price": 1000,
+      "duration": 7
+    },
+    {
+      "plan_id": "92",
+      "name": "2GB (CG)",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "94",
+      "name": "3.5GB (CG)",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "93",
+      "name": "3GB (CG)",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "95",
+      "name": "4GB (CG)",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "96",
+      "name": "6GB (CG)",
+      "price": 2500,
+      "duration": 7
+    },
+    {
+      "plan_id": "97",
+      "name": "8GB (CG)",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "98",
+      "name": "10GB (CG)",
+      "price": 3000,
+      "duration": 7
+    },
+    {
+      "plan_id": "99",
+      "name": "10GB (CG)",
+      "price": 4000,
+      "duration": 30
+    },
+    {
+      "plan_id": "100",
+      "name": "13GB (CG)",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "101",
+      "name": "18GB (CG)",
+      "price": 5000,
+      "duration": 7
+    },
+    {
+      "plan_id": "102",
+      "name": "18GB (CG)",
+      "price": 6000,
+      "duration": 30
+    },
+    {
+      "plan_id": "103",
+      "name": "25GB (CG)",
+      "price": 8000,
+      "duration": 30
+    }
+  ],
+  "airtel_GIFTING": [
+    {
+      "plan_id": "212",
+      "name": "250MB Night Plan (12 - 5 Am)",
+      "price": 50,
+      "duration": 1
+    },
+    {
+      "plan_id": "198",
+      "name": "75MB Daily Plan ",
+      "price": 75,
+      "duration": 1
+    },
+    {
+      "plan_id": "189",
+      "name": "110MB Plan",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "211",
+      "name": "200MB Social Plan Platforms ",
+      "price": 100,
+      "duration": 2
+    },
+    {
+      "plan_id": "210",
+      "name": "1GB Social Plan Platforms",
+      "price": 300,
+      "duration": 3
+    },
+    {
+      "plan_id": "362",
+      "name": "1GB Binge Plan",
+      "price": 500,
+      "duration": 1
+    },
+    {
+      "plan_id": "215",
+      "name": "2GB Binge Plan + Youtube & Social Plan Data",
+      "price": 600,
+      "duration": 2
+    },
+    {
+      "plan_id": "197",
+      "name": "3GB Binge Plan + Youtube & Social Plan Data",
+      "price": 750,
+      "duration": 2
+    },
+    {
+      "plan_id": "209",
+      "name": "1GB Plan",
+      "price": 800,
+      "duration": 7
+    },
+    {
+      "plan_id": "196",
+      "name": "1.5GB Weekly Plan + Youtube & Social Plan",
+      "price": 1000,
+      "duration": 7
+    },
+    {
+      "plan_id": "204",
+      "name": "4GB Binge Plan + Youtube & Social Plan Data",
+      "price": 1000,
+      "duration": 2
+    },
+    {
+      "plan_id": "216",
+      "name": "6GB Binge Plan + Youtube & Social Plan Data",
+      "price": 1500,
+      "duration": 2
+    },
+    {
+      "plan_id": "195",
+      "name": "2GB Plan",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "208",
+      "name": "4GB Weekly Plan + Youtube & Social Plan",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "363",
+      "name": "6GB Weekly Plan + Youtube & Social Plan Data",
+      "price": 2000,
+      "duration": 7
+    },
+    {
+      "plan_id": "207",
+      "name": "3GB Monthly Plan",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "200",
+      "name": "8GB Weekly Plan + Youtube & Social Plan",
+      "price": 2500,
+      "duration": 7
+    },
+    {
+      "plan_id": "194",
+      "name": "4GB Monthly Plan + Youtube & Social Plan",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "193",
+      "name": "10GB Weekly Plan + Youtube & Social Plan",
+      "price": 3000,
+      "duration": 7
+    },
+    {
+      "plan_id": "192",
+      "name": "8GB Monthly Plan + Youtube & Social Plan",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "214",
+      "name": "10GB Monthly Plan + Youtube & Social Plan",
+      "price": 4000,
+      "duration": 30
+    },
+    {
+      "plan_id": "206",
+      "name": "20GB Weekly Plan + Youtube & Social Plan",
+      "price": 5000,
+      "duration": 7
+    },
+    {
+      "plan_id": "191",
+      "name": "13GB Monthly Plan + Youtube & Social Plan",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "205",
+      "name": "18GB Monthly Plan + Youtube & Social Plan",
+      "price": 6000,
+      "duration": 30
+    },
+    {
+      "plan_id": "199",
+      "name": "25GB Monthly Plan + Youtube & Social Plan",
+      "price": 8000,
+      "duration": 30
+    },
+    {
+      "plan_id": "203",
+      "name": "35GB Monthly Plan + Youtube & Social Plan",
+      "price": 10000,
+      "duration": 30
+    },
+    {
+      "plan_id": "202",
+      "name": "60GB Monthly Plan + Youtube & Social Plan",
+      "price": 15000,
+      "duration": 30
+    },
+    {
+      "plan_id": "201",
+      "name": "100GB Monthly Plan + Youtube & Social Plan",
+      "price": 20000,
+      "duration": 30
+    },
+    {
+      "plan_id": "213",
+      "name": "160GB Monthly Plan",
+      "price": 30000,
+      "duration": 30
+    },
+    {
+      "plan_id": "190",
+      "name": "210GB Data",
+      "price": 40000,
+      "duration": 30
+    }
+  ],
+  "glo_CG": [
+    {
+      "plan_id": "59",
+      "name": "200MB (CG)",
+      "price": 92,
+      "duration": 14
+    },
+    {
+      "plan_id": "60",
+      "name": "500MB (CG)",
+      "price": 215,
+      "duration": 30
+    },
+    {
+      "plan_id": "61",
+      "name": "1GB (CG)",
+      "price": 375,
+      "duration": 3
+    },
+    {
+      "plan_id": "62",
+      "name": "1GB CG",
+      "price": 395,
+      "duration": 7
+    },
+    {
+      "plan_id": "63",
+      "name": "1GB CG",
+      "price": 445,
+      "duration": 30
+    },
+    {
+      "plan_id": "64",
+      "name": "2GB CG",
+      "price": 890,
+      "duration": 30
+    },
+    {
+      "plan_id": "65",
+      "name": "3GB CG",
+      "price": 1124.98,
+      "duration": 3
+    },
+    {
+      "plan_id": "66",
+      "name": "3GB CG",
+      "price": 1185,
+      "duration": 7
+    },
+    {
+      "plan_id": "67",
+      "name": "3GB CG",
+      "price": 1335,
+      "duration": 30
+    },
+    {
+      "plan_id": "68",
+      "name": "5GB CG",
+      "price": 1875,
+      "duration": 3
+    },
+    {
+      "plan_id": "69",
+      "name": "5GB CG",
+      "price": 1975.01,
+      "duration": 7
+    },
+    {
+      "plan_id": "70",
+      "name": "5GB CG",
+      "price": 2225,
+      "duration": 30
+    },
+    {
+      "plan_id": "71",
+      "name": "10GB CG",
+      "price": 4450,
+      "duration": 30
+    }
+  ],
+  "glo_GIFTING": [
+    {
+      "plan_id": "220",
+      "name": "135MB Social Bundle",
+      "price": 50,
+      "duration": 3
+    },
+    {
+      "plan_id": "255",
+      "name": "45MB",
+      "price": 50,
+      "duration": 1
+    },
+    {
+      "plan_id": "222",
+      "name": "350MB Night Plan",
+      "price": 60,
+      "duration": 1
+    },
+    {
+      "plan_id": "219",
+      "name": "335MB Social Bundle",
+      "price": 100,
+      "duration": 7
+    },
+    {
+      "plan_id": "268",
+      "name": "125MB (120MB + 5MB Night)",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "228",
+      "name": "245MB Campus Booster (240MB + 5MB Night)",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "256",
+      "name": "300MB (myg Social Bundle)",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "221",
+      "name": "750MB Night Plan",
+      "price": 120,
+      "duration": 1
+    },
+    {
+      "plan_id": "267",
+      "name": "275MB (250MB + 25MB Night)",
+      "price": 200,
+      "duration": 2
+    },
+    {
+      "plan_id": "227",
+      "name": "525MB Campus Booster (500MB + 25MB Night)",
+      "price": 200,
+      "duration": 2
+    },
+    {
+      "plan_id": "252",
+      "name": "875MB Weekend",
+      "price": 200,
+      "duration": 2
+    },
+    {
+      "plan_id": "218",
+      "name": "1.1GB Social Bundle Nights",
+      "price": 300,
+      "duration": 10
+    },
+    {
+      "plan_id": "253",
+      "name": "1GB (my G Social Bundle)",
+      "price": 300,
+      "duration": 3
+    },
+    {
+      "plan_id": "243",
+      "name": "2.5GB",
+      "price": 500,
+      "duration": 2
+    },
+    {
+      "plan_id": "361",
+      "name": "Collabo Package (450MB Data + 10 Minutes Voice)",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "244",
+      "name": "2GB Special",
+      "price": 500,
+      "duration": 1
+    },
+    {
+      "plan_id": "251",
+      "name": "1.5GB (my G Social Bundle)",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "266",
+      "name": "1.55GB (550MB + 1GB Night)",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "217",
+      "name": "1.8GB Social Bundle Nights",
+      "price": 500,
+      "duration": 15
+    },
+    {
+      "plan_id": "226",
+      "name": "2.1GB Campus Booster (1.1GB + 1GB Night)",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "238",
+      "name": "3.55GB Special Plan",
+      "price": 600,
+      "duration": 2
+    },
+    {
+      "plan_id": "245",
+      "name": "1.1GB",
+      "price": 750,
+      "duration": 14
+    },
+    {
+      "plan_id": "237",
+      "name": "5.1GB Special Plan",
+      "price": 1000,
+      "duration": 2
+    },
+    {
+      "plan_id": "360",
+      "name": "Collabo Package (1.25GB Data + 20 Minutes Voice)",
+      "price": 1000,
+      "duration": 7
+    },
+    {
+      "plan_id": "265",
+      "name": "2.6GB",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "225",
+      "name": "4.2GB Campus Booster (2.2GB + 2GB Night)",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "249",
+      "name": "3.5GB (my G Social Bundle)",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "246",
+      "name": "3.7GB (1.7GB + 2GB Night)",
+      "price": 1000,
+      "duration": 7
+    },
+    {
+      "plan_id": "248",
+      "name": "5.2GB (2.2GB + 3GB Night)",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "250",
+      "name": "6GB Special (4GB + 2GB Night)",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "359",
+      "name": "Collabo Package (1.85GB Data + 30 Minutes Voice)",
+      "price": 1500,
+      "duration": 14
+    },
+    {
+      "plan_id": "247",
+      "name": "9GB (6.5GB + 2.5GB Night)",
+      "price": 2000,
+      "duration": 7
+    },
+    {
+      "plan_id": "224",
+      "name": "10GB Campus Booster (6.5GB + 3.5GB Night)",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "232",
+      "name": "Always-on N2000",
+      "price": 2000,
+      "duration": 15
+    },
+    {
+      "plan_id": "358",
+      "name": "Collabo Package (3GB Data + 40 Minutes Voice)",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "264",
+      "name": "6.25GB (3.25GB + 3GB Night)",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "357",
+      "name": "Collabo Package (4GB Data + 50 Minutes Voice)",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "263",
+      "name": "7.25GB (4.25GB + 3GB Night)",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "356",
+      "name": "Collabo Package (7.5GB Data + 60 Minutes Voice)",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "262",
+      "name": "10.5GB (8.5GB +2GB Night)",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "231",
+      "name": "Always-on N3500",
+      "price": 3500,
+      "duration": 30
+    },
+    {
+      "plan_id": "261",
+      "name": "12.5GB",
+      "price": 4000,
+      "duration": 30
+    },
+    {
+      "plan_id": "223",
+      "name": "32GB For 30 Days Campus Booster (29GB + 3GB Night)",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "355",
+      "name": "Collabo Package (12.5GB Data + 100 Minutes Voice)",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "260",
+      "name": "17GB (14.5GB + 2.5GB Night)",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "230",
+      "name": "Always-on N5000",
+      "price": 5000,
+      "duration": 30
+    },
+    {
+      "plan_id": "241",
+      "name": "20.5GB",
+      "price": 6000,
+      "duration": 30
+    },
+    {
+      "plan_id": "229",
+      "name": "Alwavs-on N7000",
+      "price": 7000,
+      "duration": 30
+    },
+    {
+      "plan_id": "259",
+      "name": "28GB",
+      "price": 8000,
+      "duration": 30
+    },
+    {
+      "plan_id": "258",
+      "name": "42GB (38GB + 4GB Night)",
+      "price": 10000,
+      "duration": 30
+    },
+    {
+      "plan_id": "257",
+      "name": "64GB",
+      "price": 15000,
+      "duration": 30
+    },
+    {
+      "plan_id": "254",
+      "name": "107GB",
+      "price": 20000,
+      "duration": 30
+    },
+    {
+      "plan_id": "235",
+      "name": "135GB Mega Plan",
+      "price": 25000,
+      "duration": 30
+    },
+    {
+      "plan_id": "242",
+      "name": "165GB Mega",
+      "price": 30000,
+      "duration": 30
+    },
+    {
+      "plan_id": "234",
+      "name": "220GB Mega Plan",
+      "price": 40000,
+      "duration": 30
+    },
+    {
+      "plan_id": "240",
+      "name": "310GB Mega Plan",
+      "price": 50000,
+      "duration": 60
+    },
+    {
+      "plan_id": "239",
+      "name": "355GB Mega Plan",
+      "price": 60000,
+      "duration": 60
+    },
+    {
+      "plan_id": "233",
+      "name": "475GB Mega Plan",
+      "price": 75000,
+      "duration": 90
+    },
+    {
+      "plan_id": "236",
+      "name": "1000GB Mega Plan",
+      "price": 150000,
+      "duration": 365
+    }
+  ],
+  "9mobile_SME": [
+    {
+      "plan_id": "128",
+      "name": "500MB (SME)",
+      "price": 260,
+      "duration": 30
+    },
+    {
+      "plan_id": "129",
+      "name": "1GB (SME)",
+      "price": 515,
+      "duration": 30
+    },
+    {
+      "plan_id": "130",
+      "name": "1.5GB (SME)",
+      "price": 750,
+      "duration": 30
+    },
+    {
+      "plan_id": "131",
+      "name": "2GB (SME)",
+      "price": 1030,
+      "duration": 30
+    },
+    {
+      "plan_id": "132",
+      "name": "3GB (SME)",
+      "price": 1545,
+      "duration": 30
+    },
+    {
+      "plan_id": "133",
+      "name": "4GB (SME)",
+      "price": 2060,
+      "duration": 30
+    },
+    {
+      "plan_id": "134",
+      "name": "4.5GB (SME)",
+      "price": 2180,
+      "duration": 30
+    },
+    {
+      "plan_id": "135",
+      "name": "5GB (SME)",
+      "price": 2575,
+      "duration": 30
+    },
+    {
+      "plan_id": "136",
+      "name": "7.5GB (SME)",
+      "price": 3700,
+      "duration": 30
+    },
+    {
+      "plan_id": "137",
+      "name": "10GB (SME)",
+      "price": 5150,
+      "duration": 30
+    },
+    {
+      "plan_id": "138",
+      "name": "11GB (SME)",
+      "price": 5665,
+      "duration": 30
+    },
+    {
+      "plan_id": "139",
+      "name": "15GB (SME)",
+      "price": 7725,
+      "duration": 30
+    },
+    {
+      "plan_id": "140",
+      "name": "20GB (SME)",
+      "price": 10300,
+      "duration": 30
+    }
+  ],
+  "9mobile_GIFTING": [
+    {
+      "plan_id": "188",
+      "name": "40MB",
+      "price": 50,
+      "duration": 1
+    },
+    {
+      "plan_id": "187",
+      "name": "83MB + 50MB Social",
+      "price": 100,
+      "duration": 1
+    },
+    {
+      "plan_id": "178",
+      "name": "150MB + 100MB Night Data",
+      "price": 150,
+      "duration": 1
+    },
+    {
+      "plan_id": "177",
+      "name": "200MB Social Plan",
+      "price": 200,
+      "duration": 7
+    },
+    {
+      "plan_id": "391",
+      "name": "250MB",
+      "price": 200,
+      "duration": 1
+    },
+    {
+      "plan_id": "186",
+      "name": "650MB + 100MB Socials",
+      "price": 500,
+      "duration": 7
+    },
+    {
+      "plan_id": "185",
+      "name": "2GB",
+      "price": 1000,
+      "duration": 30
+    },
+    {
+      "plan_id": "181",
+      "name": "2.3GB",
+      "price": 1200,
+      "duration": 30
+    },
+    {
+      "plan_id": "396",
+      "name": "3.2GB ",
+      "price": 1500,
+      "duration": 30
+    },
+    {
+      "plan_id": "397",
+      "name": "3.4GB",
+      "price": 1500,
+      "duration": 7
+    },
+    {
+      "plan_id": "180",
+      "name": "4.5GB",
+      "price": 2000,
+      "duration": 30
+    },
+    {
+      "plan_id": "179",
+      "name": "5.2GB",
+      "price": 2500,
+      "duration": 30
+    },
+    {
+      "plan_id": "184",
+      "name": "6.2GB",
+      "price": 3000,
+      "duration": 30
+    },
+    {
+      "plan_id": "183",
+      "name": "8.4GB",
+      "price": 4000,
+      "duration": 30
+    },
+    {
+      "plan_id": "182",
+      "name": "11.4GB",
+      "price": 5000,
+      "duration": 30
+    }
+  ]
+}

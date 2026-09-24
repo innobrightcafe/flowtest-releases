@@ -1,0 +1,19 @@
+node_modules
+.git
+.github
+.gradle
+.kotlin
+app
+gradle
+*.iml
+local.properties
+.env
+debug.keystore*
+server.log
+
+# Ensure APK binaries are never ignored by Docker
+!webapp/FlowTest.apk
+!webapp/download/FlowTest.apk
+!FlowTest.apk
+!.build-outputs/*.apk
+
