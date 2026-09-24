@@ -1,0 +1,6 @@
+{
+  "name": "FlowTest",
+  "description": "FlowTest - High-Speed VPN, VTU Data Vending, Airtime & Utility Services Platform (Business: INOSOFTTECH LIMITED)",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

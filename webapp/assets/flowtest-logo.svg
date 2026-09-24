@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <defs>
+    <!-- Radial Ambient Glow -->
+    <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Top-Right Obsidian Black Gradient -->
+    <linearGradient id="topRightBlack" x1="50%" y1="10%" x2="90%" y2="50%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#070E17" />
+      <stop offset="100%" stop-color="#050A10" />
+    </linearGradient>
+
+    <!-- Bottom-Left CyberCyan Primary Gradient -->
+    <linearGradient id="bottomLeftCyan" x1="10%" y1="50%" x2="50%" y2="90%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="55%" stop-color="#0891B2" />
+      <stop offset="100%" stop-color="#045366" />
+    </linearGradient>
+
+    <!-- Circular Rim Specular Gradient -->
+    <linearGradient id="rimSpecular" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.7" />
+      <stop offset="45%" stop-color="#06B6D4" stop-opacity="0.25" />
+      <stop offset="75%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="100%" stop-color="#0891B2" stop-opacity="0.35" />
+    </linearGradient>
+
+    <!-- Outer Shield Bevel Gradient -->
+    <linearGradient id="shieldOuterBevel" x1="20%" y1="15%" x2="80%" y2="85%">
+      <stop offset="0%" stop-color="#02323E" />
+      <stop offset="50%" stop-color="#045366" />
+      <stop offset="100%" stop-color="#077A97" />
+    </linearGradient>
+
+    <!-- Inner Raised Shield Face Gradient -->
+    <linearGradient id="shieldInnerFace" x1="25%" y1="20%" x2="75%" y2="80%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="45%" stop-color="#0891B2" />
+      <stop offset="100%" stop-color="#045366" />
+    </linearGradient>
+
+    <!-- Circular Clip Path for Token -->
+    <clipPath id="tokenCircleClip">
+      <circle cx="54" cy="54" r="42" />
+    </clipPath>
+  </defs>
+
+  <!-- Ambient Outer Glow -->
+  <circle cx="54" cy="54" r="48" fill="url(#ambientGlow)" />
+
+  <!-- Diagonal Dual-Tone Circular Token -->
+  <g clip-path="url(#tokenCircleClip)">
+    <!-- Base Top-Right: Deep Obsidian Black -->
+    <rect x="0" y="0" width="108" height="108" fill="url(#topRightBlack)" />
+
+    <!-- Bottom-Left Diagonal Half: CyberCyan Primary Gradient -->
+    <polygon points="0,0 108,108 0,108" fill="url(#bottomLeftCyan)" />
+
+    <!-- Diagonal Dividing Seam Specular Highlight -->
+    <line x1="12" y1="12" x2="96" y2="96" stroke="#FFFFFF" stroke-opacity="0.65" stroke-width="1.2" stroke-linecap="round" />
+  </g>
+
+  <!-- Circular Outer Rim Specular Highlight Stroke -->
+  <circle cx="54" cy="54" r="41.5" fill="none" stroke="url(#rimSpecular)" stroke-width="1.5" />
+
+  <!-- Outer 3D Shield Sculpted Base -->
+  <path d="M54,32 C60,34.5 69,35 75,37 L75,59 C75,74 63,85 54,88 C45,85 33,74 33,59 L33,37 C39,35 48,34.5 54,32 Z"
+        fill="url(#shieldOuterBevel)" />
+
+  <!-- Inner Raised Shield Sculpted Face -->
+  <path d="M54,36 C58,37.5 64.5,38 68.5,39.2 L68.5,54.5 C68.5,65 60.5,73 54,75.5 C47.5,73 39.5,65 39.5,54.5 L39.5,39.2 C43.5,38 50,37.5 54,36 Z"
+        fill="url(#shieldInnerFace)"
+        stroke="#70E0F7FA"
+        stroke-width="0.8" />
+
+  <!-- Central Specular Ridge Line -->
+  <line x1="54" y1="36.5" x2="54" y2="75" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="0.75" />
+</svg>

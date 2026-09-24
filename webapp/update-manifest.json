@@ -1,0 +1,12 @@
+{
+  "versionCode": 167,
+  "versionName": "1.4.67",
+  "commitHash": "c146700",
+  "releaseNotes": "FlowTest Android APK (v1.4.67 - Build 167) fixes session lock PIN verification, adds 4-to-6 digit flexible unlock, adds instant Reset/Set Passcode directly from the lock screen, and enhances thumbprint/biometric prompt accessibility after session expiration.",
+  "isMandatory": false,
+  "apkDownloadUrl": "https://github.com/innobrightcafe/flowtest-releases/releases/download/v1.4.67/FlowTest.apk",
+  "downloadUrl": "https://github.com/innobrightcafe/flowtest-releases/releases/download/v1.4.67/FlowTest.apk",
+  "fallbackApkUrl": "https://github.com/innobrightcafe/flowtest-releases/releases/latest/download/FlowTest.apk",
+  "fileSizeMb": 35.86,
+  "deployedAt": "2026-09-22T22:50:00Z"
+}

@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">FlowTest</string>
+
+    <!-- Firebase Auto-Initialization Fallback Resources -->
+    <string name="google_app_id" translatable="false">1:78057514400:android:1c1b20123712d9491fb0c5</string>
+    <string name="gcm_defaultSenderId" translatable="false">78057514400</string>
+    <string name="default_web_client_id" translatable="false">78057514400-dge9lhjuaai30hceavrgjnntu0q1rq9c.apps.googleusercontent.com</string>
+    <string name="google_api_key" translatable="false">AIzaSyDDzkOG2bmtM45xv_kaY9t1VN8gXv028Hc</string>
+    <string name="firebase_database_url" translatable="false">https://getmehost-db.firebaseio.com</string>
+    <string name="google_storage_bucket" translatable="false">getmehost-db.firebasestorage.app</string>
+    <string name="project_id" translatable="false">getmehost-db</string>
+</resources>

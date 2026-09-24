@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlowTest — WireGuard VPN, VTU Data & BYOD Bulk SMS</title>
+  <meta name="description" content="Download FlowTest Android app. Zero-trust WireGuard VPN, instant automated VTU data vending, utility bills, and 100% DND bypass Bulk SMS gateway.">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/svg+xml" href="/assets/flowtest-logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192.png">
+  <link rel="apple-touch-icon" href="/assets/flowtest-logo.png">
+  <meta property="og:image" content="/assets/flowtest-logo.png">
+
+  <!-- Fonts & Tailwind CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    if (typeof tailwind !== 'undefined') {
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              primary: '#0891B2',
+              'primary-hover': '#06B6D4',
+              dark: '#070E17',
+              card: '#0C1D33',
+              border: '#1A3352',
+            }
+          }
+        }
+      };
+    }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    html, body {
+      background-color: #070E17 !important;
+      color: #F1F5F9 !important;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background-color: #070E17 !important;
+      color: #F1F5F9 !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      overflow-x: hidden;
+    }
+    .grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    }
+    .solid-card {
+      background-color: #0C1D33;
+      border: 1px solid #1A3352;
+    }
+    /* Logo Entrance Spin Animation */
+    @keyframes logoSpinEntrance {
+      0% {
+        transform: rotate(-360deg) scale(0.85);
+        opacity: 0.3;
+      }
+      70% {
+        transform: rotate(18deg) scale(1.05);
+        opacity: 1;
+      }
+      85% {
+        transform: rotate(-6deg) scale(0.98);
+      }
+      100% {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+      }
+    }
+    .animate-logo-spin {
+      animation: logoSpinEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      will-change: transform, opacity;
+      transform-origin: center center;
+    }
+    .animate-logo-spin:hover {
+      transform: rotate(360deg);
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #070E17; }
+    ::-webkit-scrollbar-thumb { background: #1A3352; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0891B2; }
+  </style>
+</head>
+<body class="relative selection:bg-primary selection:text-dark">
+
+  <!-- Background Grid Pattern (No Gradients) -->
+  <div class="fixed inset-0 pointer-events-none z-0 grid-pattern"></div>
+
+  <!-- Top Announcement Bar -->
+  <div class="relative z-50 bg-[#0A0F1D] border-b border-border px-4 py-2.5 text-center text-xs sm:text-sm font-bold">
+    <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 text-slate-200">
+      <span id="topAnnouncementBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-primary text-dark font-mono text-[11px] font-black">
+        v1.4.55 LIVE
+      </span>
+      <span>Direct Android APK with WireGuard VPN, VTU Data & 100% DND Bypass Bulk SMS.</span>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="sticky top-0 z-40 w-full border-b border-border bg-[#07090E] backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      
+      <!-- Brand Logo (Animated clockwise/anticlockwise on load) -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl overflow-hidden shadow-lg border border-teal-800/60 bg-[#07090E] p-0.5 animate-logo-spin flex-shrink-0">
+          <img src="/assets/flowtest-logo.png" alt="FlowTest Logo" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <span class="text-xl font-black tracking-tight text-white flex items-center gap-1">
+            Flow<span class="text-primary">Test</span>
+          </span>
+          <p class="text-[11px] text-slate-400 font-mono font-bold leading-none">Android Telecom Suite</p>
+        </div>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-300">
+        <a href="#features" class="hover:text-primary transition">Features</a>
+        <a href="#play-protect" class="hover:text-primary transition flex items-center gap-1.5">
+          <i data-lucide="shield-alert" class="w-4 h-4 text-primary"></i>
+          <span>Play Protect Guide</span>
+        </a>
+      </nav>
+
+      <!-- Action Button -->
+      <div>
+        <a id="navDownloadBtn" href="/download/apk" download="FlowTest.apk"
+           class="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-hover text-dark font-black text-sm flex items-center gap-2 transition active:scale-95">
+          <i data-lucide="download" class="w-4 h-4 stroke-[2.5]"></i>
+          <span>Download APK</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="relative z-10 pt-16 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div class="text-center space-y-7 max-w-4xl mx-auto">
+      
+      <!-- Status Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-[#0D121F] border border-border text-xs font-bold text-slate-200 shadow-md">
+        <div class="w-6 h-6 rounded-lg overflow-hidden animate-logo-spin flex-shrink-0">
+          <img src="/assets/flowtest-logo.png" alt="FlowTest Logo" class="w-full h-full object-cover">
+        </div>
+        <span id="heroVersionBadge" class="font-mono text-primary font-black">v1.4.55 LIVE</span>
+        <span class="text-slate-500">•</span>
+        <span>Android 7.0 to 16 Ready</span>
+        <span class="text-slate-500">•</span>
+        <span id="heroBuildSizeBadge">Build 155 (~35.4 MB)</span>
+      </div>
+
+      <!-- Main Headline (Thick, High-Contrast Typography, No Gradients) -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.08]">
+        High-Speed WireGuard VPN, <br>
+        <span class="text-primary">VTU Telecom & Bulk SMS</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto font-semibold leading-relaxed">
+        Zero-trust encrypted tunneling, wholesale mobile data vending, automated utility bills, and revolutionary 100% DND bypass Bulk SMS powered by real Android SIM hardware.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-4">
+        
+        <!-- Primary Download Button -->
+        <a id="heroPrimaryDownloadBtn" href="/download/apk" download="FlowTest.apk"
+           class="w-full sm:w-auto px-8 py-4 rounded-xl bg-primary hover:bg-primary-hover text-dark font-black text-base flex items-center justify-center gap-3 transition active:scale-95 shadow-lg">
+          <i data-lucide="smartphone" class="w-5 h-5 stroke-[2.5]"></i>
+          <span class="text-left">
+            <span class="block text-base leading-tight">Download FlowTest APK</span>
+            <span id="heroDownloadSub" class="block text-[11px] font-mono text-slate-900 font-bold">v1.4.55 • Direct Download (~35.4 MB)</span>
+          </span>
+          <i data-lucide="arrow-down" class="w-5 h-5 stroke-[2.5] ml-1"></i>
+        </a>
+
+        <!-- Play Protect Guide Button -->
+        <a href="#play-protect" 
+           class="w-full sm:w-auto px-7 py-4 rounded-xl bg-[#0D121F] hover:bg-[#131A2D] border border-border hover:border-primary text-white font-extrabold text-sm flex items-center justify-center gap-2.5 transition">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-primary stroke-[2.5]"></i>
+          <span>How to Bypass Google Warning</span>
+        </a>
+
+      </div>
+
+      <!-- 4 Key Metrics Bar (High Contrast, Solid Cards) -->
+      <div class="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
+        <div class="solid-card p-4 rounded-xl border-border">
+          <div class="text-primary text-2xl font-black font-mono">100%</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">DND Bypass Rate</div>
+        </div>
+        <div class="solid-card p-4 rounded-xl border-border">
+          <div class="text-primary text-2xl font-black font-mono">₦7.50</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">Bulk SMS / Unit</div>
+        </div>
+        <div class="solid-card p-4 rounded-xl border-border">
+          <div class="text-primary text-2xl font-black font-mono">&lt; 15ms</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">WireGuard Latency</div>
+        </div>
+        <div class="solid-card p-4 rounded-xl border-border">
+          <div class="text-primary text-2xl font-black font-mono">Automated</div>
+          <div class="text-xs font-bold text-slate-400 mt-1">Instant Bank Funding</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Section: Core Capabilities (Non-repetitive, 3 Pillars) -->
+    <section id="features" class="mt-28">
+      <div class="text-center space-y-3 mb-12">
+        <div class="inline-flex items-center px-3 py-1 rounded-md bg-[#0D121F] border border-border text-xs font-mono font-bold text-primary">
+          THREE ESSENTIAL MODULES
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-black text-white">
+          Complete Mobile Telecom & Privacy Power
+        </h2>
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto font-semibold">
+          Engineered into one compact native Android application with zero external bloat.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Pillar 1: WireGuard VPN -->
+        <div class="solid-card rounded-2xl p-7 border-border hover:border-primary transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#131A2D] border border-border text-primary flex items-center justify-center mb-6">
+              <i data-lucide="shield" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <h3 class="text-xl font-black text-white mb-3">WireGuard Tunneling</h3>
+            <p class="text-xs sm:text-sm text-slate-300 font-semibold leading-relaxed mb-6">
+              Modern ChaCha20 encrypted VPN tunnel delivering gigabit throughput, cellular-to-Wi-Fi seamless roaming, live speed telemetry, and zero-trust tracker shielding.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-border font-mono text-xs text-slate-400 space-y-2">
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> Live Upload & Download Speeds
+            </div>
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> Data Saved Compression Counter
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 2: VTU Telecom & Bills -->
+        <div class="solid-card rounded-2xl p-7 border-border hover:border-primary transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#131A2D] border border-border text-primary flex items-center justify-center mb-6">
+              <i data-lucide="zap" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <h3 class="text-xl font-black text-white mb-3">VTU Data & Airtime</h3>
+            <p class="text-xs sm:text-sm text-slate-300 font-semibold leading-relaxed mb-6">
+              Instant discounted data bundles for MTN, Airtel, Glo, and 9mobile SME. Automatic meter validation for electricity tokens (IKEDC, EKEDC, IBEDC) and Cable TV activations.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-border font-mono text-xs text-slate-400 space-y-2">
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> Automated Moniepoint Settlement
+            </div>
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> Sub-second API Dispatch
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 3: BYOD Bulk SMS SaaS -->
+        <div class="solid-card rounded-2xl p-7 border-border hover:border-primary transition flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#131A2D] border border-border text-primary flex items-center justify-center mb-6">
+              <i data-lucide="message-square" class="w-6 h-6 stroke-[2.5]"></i>
+            </div>
+            <h3 class="text-xl font-black text-white mb-3">100% DND Bypass SMS</h3>
+            <p class="text-xs sm:text-sm text-slate-300 font-semibold leading-relaxed mb-6">
+              Traditional SMS gateways fail on Do-Not-Disturb numbers. FlowTest uses real Android SIM hardware to guarantee 100% delivery across all networks with device pairing.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-border font-mono text-xs text-slate-400 space-y-2">
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> ₦7.50 / SMS (vs ₦15 Standard)
+            </div>
+            <div class="flex items-center gap-2 text-slate-300 font-bold">
+              <i data-lucide="check" class="w-4 h-4 text-primary stroke-[3]"></i> Turn Any Phone into SMS Gateway
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section: Google Play Protect Guide -->
+    <section id="play-protect" class="mt-28">
+      <div class="max-w-4xl mx-auto">
+        
+        <div class="text-center space-y-3 mb-10">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0D121F] border border-border text-primary text-xs font-mono font-bold">
+            <i data-lucide="shield-alert" class="w-4 h-4"></i>
+            <span>INSTALLATION NOTICE</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-black text-white">
+            How to Install & Bypass Google Play Protect
+          </h2>
+          <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto font-semibold">
+            Because FlowTest is installed directly and not from the Google Play Store, Android displays an alert. Follow these 3 simple steps to install:
+          </p>
+        </div>
+
+        <!-- 3-Step Visual Bypass Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <!-- Step 1 -->
+          <div class="solid-card rounded-2xl p-6 border-border">
+            <div class="w-10 h-10 rounded-xl bg-primary text-dark font-mono font-black flex items-center justify-center text-lg mb-4">
+              1
+            </div>
+            <h3 class="text-base font-black text-white mb-2">Browser Prompt</h3>
+            <p class="text-xs text-slate-300 font-semibold leading-relaxed">
+              When downloading, your browser may state: <em>"File might be harmful. Do you want to download FlowTest.apk anyway?"</em>
+            </p>
+            <div class="mt-4 p-3 rounded-lg bg-[#07090E] border border-border text-xs font-mono text-primary font-bold flex items-center gap-2">
+              <i data-lucide="check" class="w-4 h-4 stroke-[3]"></i> Tap "Download anyway"
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="solid-card rounded-2xl p-6 border-primary bg-[#0E1526]">
+            <div class="w-10 h-10 rounded-xl bg-primary text-dark font-mono font-black flex items-center justify-center text-lg mb-4">
+              2
+            </div>
+            <h3 class="text-base font-black text-white mb-2">Play Protect Alert</h3>
+            <p class="text-xs text-slate-300 font-semibold leading-relaxed">
+              When Android shows <em>"Unrecognized app"</em> or <em>"Blocked by Play Protect"</em>, tap the dropdown arrow or text:
+            </p>
+            <div class="mt-4 p-3 rounded-lg bg-[#07090E] border border-primary text-xs font-mono text-primary font-black flex items-center gap-2">
+              <i data-lucide="chevron-down" class="w-4 h-4 stroke-[3]"></i> Tap "More details" (⌵)
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="solid-card rounded-2xl p-6 border-border">
+            <div class="w-10 h-10 rounded-xl bg-primary text-dark font-mono font-black flex items-center justify-center text-lg mb-4">
+              3
+            </div>
+            <h3 class="text-base font-black text-white mb-2">Complete Install</h3>
+            <p class="text-xs text-slate-300 font-semibold leading-relaxed">
+              Select <strong>"Install anyway"</strong>. The APK installs cleanly without affecting your existing wallet balance or credentials.
+            </p>
+            <div class="mt-4 p-3 rounded-lg bg-[#07090E] border border-border text-xs font-mono text-primary font-bold flex items-center gap-2">
+              <i data-lucide="shield-check" class="w-4 h-4 stroke-[3]"></i> Tap "Install anyway"
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Action CTA -->
+        <div class="mt-10 p-6 rounded-2xl solid-card border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div>
+            <h4 class="text-base font-black text-white">Ready to install FlowTest?</h4>
+            <p class="text-xs text-slate-400 font-semibold mt-0.5">Compatible with Android 7.0 and up.</p>
+          </div>
+          <a id="bottomDownloadBtn" href="/download/apk" download="FlowTest.apk"
+             class="px-6 py-3 rounded-xl bg-primary hover:bg-primary-hover text-dark font-black text-sm flex items-center gap-2 transition active:scale-95 shadow">
+            <i data-lucide="download" class="w-4 h-4 stroke-[2.5]"></i>
+            <span>Download APK Now</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-border bg-[#07090E] py-10 px-4 sm:px-6 lg:px-8 text-xs text-slate-400 font-bold">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5 text-white">
+        <img src="/assets/flowtest-logo.png" alt="FlowTest Logo" class="w-5 h-5 rounded-md object-cover">
+        <span>FlowTest &copy; 2026. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#features" class="hover:text-primary transition">Features</a>
+        <a href="#play-protect" class="hover:text-primary transition">Play Protect Guide</a>
+        <a id="footerDownloadBtn" href="/download/apk" download="FlowTest.apk" class="text-primary hover:underline transition">Download APK</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    function compareSemVer(a, b) {
+      const pA = (a || '').replace(/^v/i, '').trim().split('.').map(n => parseInt(n, 10) || 0);
+      const pB = (b || '').replace(/^v/i, '').trim().split('.').map(n => parseInt(n, 10) || 0);
+      for (let i = 0; i < Math.max(pA.length, pB.length); i++) {
+        const numA = pA[i] || 0;
+        const numB = pB[i] || 0;
+        if (numA > numB) return 1;
+        if (numA < numB) return -1;
+      }
+      return 0;
+    }
+
+    async function fetchLatestReleaseMetadata() {
+      // 1. Query backend /api/version (served by local Cloud Run gateway with internal caching, zero rate limit)
+      try {
+        const resp = await fetch(`/api/version?t=${Date.now()}`);
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data && data.versionName) {
+            const patchNum = parseInt((data.versionName || '').split('.').pop() || '0', 10);
+            return {
+              versionName: data.versionName,
+              tagName: `v${data.versionName}`,
+              buildNumber: data.versionCode || (patchNum > 0 ? (100 + patchNum) : 162),
+              downloadUrl: '/download/apk',
+              fileSizeMb: data.fileSizeMb || '35.4',
+              releaseNotes: data.releaseNotes || ''
+            };
+          }
+        }
+      } catch (err) {
+        console.warn('/api/version lookup notice:', err);
+      }
+
+      // 2. Query local /update-manifest.json
+      try {
+        const mResp = await fetch(`/update-manifest.json?t=${Date.now()}`);
+        if (mResp.ok) {
+          const m = await mResp.json();
+          if (m && m.versionName) {
+            return {
+              versionName: m.versionName,
+              tagName: `v${m.versionName}`,
+              buildNumber: m.versionCode || 162,
+              downloadUrl: '/download/apk',
+              fileSizeMb: m.fileSizeMb || '35.4',
+              releaseNotes: m.releaseNotes || ''
+            };
+          }
+        }
+      } catch (err) {
+        console.warn('update-manifest lookup skipped:', err);
+      }
+
+      // 3. Fallback release info
+      return {
+        versionName: '1.4.62',
+        tagName: 'v1.4.62',
+        buildNumber: 162,
+        downloadUrl: '/download/apk',
+        fileSizeMb: '35.4',
+        releaseNotes: 'Official release of FlowTest Android APK'
+      };
+    }
+
+    async function initLandingDownloadLinks() {
+      try {
+        const data = await fetchLatestReleaseMetadata();
+        if (!data) return;
+
+        const verTag = data.tagName || `v${data.versionName}`;
+        const sizeStr = typeof data.fileSizeMb === 'number'
+          ? `${data.fileSizeMb.toFixed(1)} MB`
+          : (String(data.fileSizeMb).includes('MB') ? data.fileSizeMb : `${data.fileSizeMb} MB`);
+
+        // 1. Update Version Badges dynamically
+        const heroBadge = document.getElementById('heroVersionBadge');
+        if (heroBadge) heroBadge.textContent = `${verTag} LIVE`;
+
+        const topBadge = document.getElementById('topAnnouncementBadge');
+        if (topBadge) topBadge.textContent = `${verTag} LIVE`;
+
+        // 2. Update Build and Package Size badge dynamically
+        const sizeBadge = document.getElementById('heroBuildSizeBadge');
+        if (sizeBadge) sizeBadge.textContent = `Build ${data.buildNumber} (~${sizeStr})`;
+
+        // 3. Update Hero Button Subtitle dynamically
+        const heroSub = document.getElementById('heroDownloadSub');
+        if (heroSub) heroSub.textContent = `${verTag} • Direct Download (~${sizeStr})`;
+
+        // 4. Update ALL Download buttons to point directly to /download/apk
+        const downloadElements = document.querySelectorAll('a[download="FlowTest.apk"], a[href*="FlowTest.apk"], a[href*="/download"]');
+        downloadElements.forEach(el => {
+          el.href = '/download/apk';
+          el.setAttribute('download', 'FlowTest.apk');
+        });
+      } catch (e) {
+        console.warn('initLandingDownloadLinks notice:', e);
+      }
+    }
+
+    // Execute immediately on script load
+    initLandingDownloadLinks();
+  </script>
+</body>
+</html>

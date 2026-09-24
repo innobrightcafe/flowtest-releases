@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://flowtest2026.com/sitemap.xml
